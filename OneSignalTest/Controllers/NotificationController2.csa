@@ -1,0 +1,98 @@
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using OneSignalApi.Model;
+using OneSignalTest.Data;
+using OneSignalTest.Models;
+using OneSignalTest.Services;
+
+
+namespace OneSignalTest.Controllers
+{
+    
+    [ApiController]
+    [Route("api/onesignal")]
+    public class NotificationController : ControllerBase
+    {
+        private readonly OneSignalService _oneSignalService;
+        private readonly ApplicationDbContext _context;
+
+
+        public NotificationController(OneSignalService oneSignalService, ApplicationDbContext context)
+        {
+            _oneSignalService = oneSignalService;
+            _context = context;
+        }
+
+        [HttpPost("SendNotificationToSpecificUserWithPlayerId")]
+        public async Task<IActionResult> SendNotificationToSpecificUserWithPlayerId([FromBody] NotificationRequest request)
+        {
+            Console.WriteLine("SendNotificationToSpecificUserWithPlayerId");
+            var playerIds = _context.OneSignalUsers.AsEnumerable()
+                .Where(u => request.PlayerIds.Contains(u.PlayerId))
+                .Select(u => u.PlayerId)
+                .ToList();
+            
+            if (playerIds.Count == 0) return BadRequest("No players found");
+
+            Console.WriteLine($"Sending notification to user: {string.Join(", ", playerIds)}");
+            var success = await _oneSignalService.SendNotificationAsync(request.Message, playerIds);
+            
+            return success ? Ok("Notification Sent") : BadRequest("Error sending notification");
+        }
+        
+        [HttpPost("SendNotificationToSpecificUserWithExternalUserId")]
+        public async Task<IActionResult> SendNotificationToSpecificUserWithExternalUserId([FromBody] NotificationRequest request)
+        {
+            Console.WriteLine("SendNotificationToSpecificUserWithExternalUserId");
+            var eUIDs = _context.OneSignalUsers.AsEnumerable()
+                .Where(u => request.ExternalUserIds.Contains(u.ExternalUserId))
+                .Select(u => u.ExternalUserId)
+                .ToList();
+            
+            if (eUIDs.Count == 0) return BadRequest("No results found");
+
+            Console.WriteLine($"Sending notification to user: {string.Join(", ", eUIDs)}");
+            var success = await _oneSignalService.SendNotificationAsync(request.Message, eUIDs);
+            
+            return success ? Ok("Notification Sent") : BadRequest("Error sending notification");
+        }
+        
+        [HttpPost("SendNotificationToActiveUsers")]
+        public async Task<IActionResult> SendNotificationToActiveUsers([FromBody] NotificationRequest request)
+        {
+            Console.WriteLine("SendNotificationToActiveUsers");
+            var playerIds = _context.OneSignalUsers.AsEnumerable()
+                .Where(u => request.PlayerIds.Contains(u.PlayerId))
+                .Select(u => u.PlayerId)
+                .ToList();
+            
+            if (playerIds.Count == 0) return BadRequest("No players found");
+
+            Console.WriteLine($"Sending notification to user: {string.Join(", ", playerIds)}");
+            var success = await _oneSignalService.SendNotificationAsync(request.Message, playerIds);
+            
+            return success ? Ok("Notification Sent") : BadRequest("Error sending notification");
+        }
+        
+        [HttpPost("SendNotificationToAllUsers")]
+        public async Task<IActionResult> SendNotificationToAllUsers([FromBody] NotificationRequest request)
+        {
+            Console.WriteLine("SendNotificationToAllUsers");
+            var playerIds = _context.OneSignalUsers.AsEnumerable()
+                .Where(u => request.PlayerIds.Contains(u.PlayerId))
+                .Select(u => u.PlayerId)
+                .ToList(); 
+            
+            if (playerIds.Count == 0) return BadRequest("No players found");
+
+            Console.WriteLine($"Sending notification to user: {string.Join(", ", playerIds)}");
+            var success = await _oneSignalService.SendNotificationAsync(request.Message, playerIds);
+            
+            return success ? Ok("Notification Sent") : BadRequest("Error sending notification");
+        }
+        
+        
+    }
+    
+}
+

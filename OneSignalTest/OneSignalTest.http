@@ -1,0 +1,6 @@
+@OneSignalTest_HostAddress = http://localhost:5010
+
+GET {{OneSignalTest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
