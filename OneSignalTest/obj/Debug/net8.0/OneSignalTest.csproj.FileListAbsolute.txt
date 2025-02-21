@@ -92,3 +92,4 @@ C:\Users\thene\Desktop\OneSignalTest\OneSignalTest\bin\Debug\net8.0\runtimes\bro
 C:\Users\thene\Desktop\OneSignalTest\OneSignalTest\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\thene\Desktop\OneSignalTest\OneSignalTest\bin\Debug\net8.0\MySqlConnector.dll
 C:\Users\thene\Desktop\OneSignalTest\OneSignalTest\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\thene\Desktop\OneSignalTest\OneSignalTest\obj\Debug\net8.0\OneSignalTest.sourcelink.json

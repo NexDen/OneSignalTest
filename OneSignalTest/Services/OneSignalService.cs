@@ -42,7 +42,7 @@ namespace OneSignalTest.Services
                 included_segments = new[] { "Subscribed Users" },
                 include_aliases = new
                 {
-                    external_id = new[] {user.ExternalUserId},
+                    onesignal_id = new[] {user.PlayerId},
                 },
                 target_channel = "push"
             };

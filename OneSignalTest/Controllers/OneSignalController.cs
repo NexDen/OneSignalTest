@@ -35,6 +35,15 @@ namespace OneSignalTest.Controllers
             return Ok(new { message = "User already exists" });
         }
 
+        [HttpGet("getusers")]
+        public async Task<IActionResult> GetUsers()
+        {
+            Console.WriteLine("GetUsers");
+            var users = _context.OneSignalUsers;
+            return Ok(users);
+        }
+        
+        
         [HttpPost("update")]
         public async Task<IActionResult> UpdateExternalUserId([FromBody] OneSignalUser user)
         {

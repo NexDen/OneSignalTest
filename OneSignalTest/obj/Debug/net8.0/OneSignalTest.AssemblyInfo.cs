@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OneSignalTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d99c922db5e4f77596bed9e2b519d335a2fe2b85")]
 [assembly: System.Reflection.AssemblyProductAttribute("OneSignalTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OneSignalTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
